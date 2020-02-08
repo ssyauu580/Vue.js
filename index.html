@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Vue Sample</title>
+  </head>
+
+  <body>
+    <div id="app">
+      {{message}}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script type="text/javascript">
+      new Vue({
+        el : '#app',
+        data : {
+          message : 'Hello Vue.js!',
+        },
+        beforeCreate : function () {
+            console.log("beforeCreate")
+        },
+        created : function () {
+            console.log("created");
+        },
+        mounted : function () {
+          console.log("mounted");
+
+          //Message 값 변경
+          this.message = 'Hello Vue!';
+        },
+        beforeUpdate : function () {
+          console.log("");
+        },
+        updated : function () {
+          // 값이 변경되었을 떄 호출
+          console.log("updated");
+        }
+      });
+    </script>
+  </body>
+</html>
