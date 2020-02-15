@@ -5,30 +5,48 @@
       <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
 
+    <!-- 팝업창 -->
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">경고</h3>
+      <span slot="footer" @click="showModal = false">
+        할 일을 입력하세요.
+        <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+      </span>
+    </modal>
   </div>
 </template>
 
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
   data() {
     return {
-      newTodoItem : ''
+      newTodoItem : '',
+      showModal : false
     }
   },
   methods : {
     addTodo() {
-      if(this.newTodoItem == '')
+      if(this.newTodoItem == '') {
+        this.showModal = !this.showModal;
+        console.log(this.showModal);
         return;
+      }
 
       var value = this.newTodoItem.trim();
-      localStorage.setItem(value,value);
+      this.$emit('addTodo', value);
       this.clearInput();
     },
 
     clearInput() {
       this.newTodoItem = '';
     }
+  },
+
+  components : {
+    Modal : Modal
   }
 
 }
